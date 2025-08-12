@@ -1,0 +1,52 @@
+---
+layout: null
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shop - Pure Honey</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <script src="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.js"></script>
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.css" />
+  <meta name="description" content="Shop Pure Honey’s natural honey products online." />
+</head>
+<body>
+  <header>
+    <h1>Pure Honey Shop</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/shop/">Shop</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <ul class="product-list">
+      {% for product in collections.products %}
+      <li>
+        <img src="{{ product.data.image }}" alt="{{ product.data.title }}" loading="lazy" width="200" height="200" />
+        <h3>{{ product.data.title }}</h3>
+        <p>${{ product.data.price.toFixed(2) }}</p>
+        <p>{{ product.data.description }}</p>
+        <button class="snipcart-add-item"
+                data-item-id="{{ product.data.sku }}"
+                data-item-price="{{ product.data.price }}"
+                data-item-url="/shop/"
+                data-item-description="{{ product.data.description }}"
+                data-item-image="{{ product.data.image }}"
+                data-item-name="{{ product.data.title }}">
+          Add to Cart
+        </button>
+      </li>
+      {% endfor %}
+    </ul>
+  </main>
+
+  <div hidden id="snipcart" data-api-key="YOUR_SNIPCART_PUBLIC_API_KEY"></div>
+</body>
+</html>
